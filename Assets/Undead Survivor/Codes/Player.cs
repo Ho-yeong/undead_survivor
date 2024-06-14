@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -15,11 +16,17 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
+    // // Update is called once per frame
+    // 기존 방식
+    // void Update()
+    // {
+    //     inputVec.x = Input.GetAxisRaw("Horizontal");
+    //     inputVec.y = Input.GetAxisRaw("Vertical");
+    // }
+
+    // input system 방식
+    void OnMove(InputValue value) {
+        inputVec = value.Get<Vector2>();
     }
 
     void FixedUpdate() {
