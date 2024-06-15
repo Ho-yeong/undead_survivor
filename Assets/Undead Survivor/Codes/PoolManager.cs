@@ -16,8 +16,6 @@ public class PoolManager : MonoBehaviour
         for (int i = 0; i < pools.Length; ++i) {
             pools[i] = new List<GameObject>();
         }
-
-        Debug.Log(pools.Length);
     }
 
     public GameObject Get(int index) {
