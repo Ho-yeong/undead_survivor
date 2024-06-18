@@ -18,21 +18,29 @@ public class Bullet : MonoBehaviour
         this.per = per;
 
         // 원거리
-        if (per > -1) {
+        if (per >= 0) {
             rigid.velocity = dir * 15f;
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
-        if (!collision.CompareTag("Enemy") || per == -1) {
+        if (!collision.CompareTag("Enemy") || per == -100) {
             return;
         }    
 
         per--;
 
-        if (per == -1) {
+        if (per < 0) {
             rigid.velocity = Vector3.zero;
             gameObject.SetActive(false);
         }
+    }
+
+    void OnTriggerExit2D(Collider2D collision) {
+        if (!collision.CompareTag("area") || per == -100) {
+            return;
+        }
+
+        gameObject.SetActive(false);
     }
 }
