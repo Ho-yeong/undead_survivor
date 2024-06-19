@@ -32,19 +32,19 @@ public class Player : MonoBehaviour
 
     // // Update is called once per frame
     // 기존 방식
-    void Update()
-    {
-        if (!GameManager.instance.isLive) {
-            return;
-        }
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
-    }
-
-    // // input system 방식
-    // void OnMove(InputValue value) {
-    //     inputVec = value.Get<Vector2>();
+    // void Update()
+    // {
+    //     if (!GameManager.instance.isLive) {
+    //         return;
+    //     }
+    //     inputVec.x = Input.GetAxisRaw("Horizontal");
+    //     inputVec.y = Input.GetAxisRaw("Vertical");
     // }
+
+    // input system 방식
+    void OnMove(InputValue value) {
+        inputVec = value.Get<Vector2>();
+    }
 
     void FixedUpdate() {
         if (!GameManager.instance.isLive) {
@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
         // 위치 이동
         Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
+
+        Debug.Log(gameObject.transform.position);
     }
 
     // Update가 끝난이후 적용
